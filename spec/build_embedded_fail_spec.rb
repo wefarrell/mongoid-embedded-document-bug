@@ -24,15 +24,15 @@ composite_hash = {
 
 
 describe 'Embedded document bug' do
-  let(:move){ Composite.create(composite_hash) }
+  let(:composite){ Composite.create(composite_hash) }
 
   before do
-    move.build_embedded_one(embedded_one_hash)
-    move.build_embedded_two(embedded_two_hash)
-    move.save!
+    composite.build_embedded_one(embedded_one_hash)
+    composite.build_embedded_two(embedded_two_hash)
+    composite.save!
   end
 
-  it 'sanity check' do
-    expect(move.embedded_one.param1).to be(embedded_one_hash.param1)
+  it 'builds two embedded documents and saves the composite' do
+    expect(composite.embedded_one.param1).to be(embedded_one_hash[:param1])
   end
 end
